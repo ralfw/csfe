@@ -81,4 +81,5 @@ To me it's a tool I use in Clean Code developer trainings:
 * With the CSFE I'm not only able to integrate several services into a whole solution, I also can integrate developers on different platforms into a team. CSFE allows polyglot solutions. Having developers with different backgrounds in a training no longer is a difficulty but an opportunity when doing programming exercises. 
 * Getting training participants to work as a team on a modular code base makes it possible to tackle larger exercises. Trainings thus become more fun.
 
+
 See the [wiki](https://github.com/ralfw/csfe/wiki) for more detailed information on all aspects of the CSFE.
