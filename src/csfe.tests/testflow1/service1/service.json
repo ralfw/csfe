@@ -1,0 +1,4 @@
+﻿{
+  "executable":"mono",
+  "arguments": "testserviceappendargs0.exe %argument"
+}

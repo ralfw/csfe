@@ -1,0 +1,5 @@
+﻿{
+  "name":"toupper",
+  "executable":"mono",
+  "arguments": "testservicetoupper.exe"
+}

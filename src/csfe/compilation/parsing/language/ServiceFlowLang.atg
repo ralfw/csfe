@@ -1,0 +1,90 @@
+$namespace=csfe.compilation.parsing
+
+using System.Diagnostics;
+using System.Linq;
+using csfe.compilation;
+
+COMPILER ServiceFlowLang
+
+
+public string[] RegisteredServicenames;
+public ServiceFlowLangNode ASTroot;
+
+
+IGNORECASE
+
+CHARACTERS
+    digit = '0'..'9'.
+    letter = 'a'..'z' + 'A'..'Z' + "äöüÄÖÜß_@".
+    stringChar = ANY - '\r' - '\n' - '"'.
+    TAB = '\t'.
+    CR = '\r'.
+    LF = '\n'.
+
+TOKENS
+    identifier = letter { letter | digit }.
+    tag = letter { letter | digit } ":".
+    stringliteral = "\"" { stringChar } "\"".
+    
+COMMENTS FROM "//" TO LF
+COMMENTS FROM "/*" TO "*/" NESTED
+
+
+    
+PRODUCTIONS
+    ServiceFlowLang = 
+                                            (.
+                                                this.ASTroot = new ServiceFlowLangNode();
+                                            .)
+        OperationList<this.ASTroot.Sequence>
+        .
+    
+    OperationList<OperationListNode opNodeList> = Operation<opNodeList> {">" Operation<opNodeList> }.
+    Operation<OperationListNode opNodeList> = 
+          Service<opNodeList>
+        | Switch<opNodeList>
+        .
+    
+    Service<OperationListNode opNodeList> = (. 
+                                                var op = new ServiceNode();
+                                            .)
+        servicename<op>
+        [
+            "("
+                stringliteral               (.  
+                                                // strip '"' around argument string
+                                                op.Argument = t.val.Substring(0,t.val.Length-1).Substring(1); 
+                                            .)
+            ")"
+        ]                                   (.  opNodeList.Operations.Add(op); .)
+        .
+    
+    Switch<OperationListNode opNodeList> =  (.  var swtch = new SwitchNode(); .)
+        "(" 
+            Option<swtch> 
+            {"," 
+                Option<swtch>
+            } 
+        ")"                                 (.  opNodeList.Operations.Add(swtch); .)
+        .
+    Option<SwitchNode swtch> = 
+        tag                                 (.  
+                                                var opt = new SwitchOptionNode();
+                                                // strip trailing ':'
+                                                opt.Tag = t.val.Substring(0,t.val.Length-1);
+                                            .)
+        OperationList<opt.Sequence>         (.  swtch.Options.Add(opt); .)
+        .
+    
+    servicename<ServiceNode op> = 
+        identifier                          (.  
+                                                if (this.RegisteredServicenames != null
+                                                    && !this.RegisteredServicenames.Contains(t.val))
+                                                    this.errors.SemErr(t.line, t.col, $"Unregistered service found: '{t.val}'");
+                                                op.Name = t.val; 
+                                            .)
+        [
+            "." 
+            identifier                      (.  op.Instance = t.val; .)
+        ].
+END ServiceFlowLang.
