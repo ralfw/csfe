@@ -1,0 +1,4 @@
+﻿{
+  "executable":"mono",
+  "arguments":"count.exe"
+}
