@@ -5,8 +5,13 @@ using CLAP;
 
 namespace csfe
 {
-    class App
+    public class App
     {
+        public static void Run(string[] args) {
+            Parser.Run<App>(args);
+        }
+        
+        
         [Verb(IsDefault = true)]
         public static void Run(
             [Required,Aliases("s,source")] string flowSourceFilename, 

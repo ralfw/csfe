@@ -24,11 +24,24 @@ namespace csfe.tests
         
         
         [Test]
-        public void Run()
+        public void Run_with_params()
         {
             File.WriteAllText(SOURCE_FILENAME, "toupper > service1(\"b\")");
             
             App.Run(SOURCE_FILENAME, "testflow1", "testflow1/sampleInput");
+
+            var outputFilenames = Directory.GetFiles("testflow1/output");
+            Assert.AreEqual(1, outputFilenames.Length);
+            Assert.AreEqual("A\nb", File.ReadAllText(outputFilenames[0]));
+        }
+        
+        
+        [Test]
+        public void Run_with_args()
+        {
+            File.WriteAllText(SOURCE_FILENAME, "toupper > service1(\"b\")");
+            
+            App.Run(new[]{$"-s={SOURCE_FILENAME}", "-p=testflow1", "-i=testflow1/sampleInput"});
 
             var outputFilenames = Directory.GetFiles("testflow1/output");
             Assert.AreEqual(1, outputFilenames.Length);
