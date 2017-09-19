@@ -75,11 +75,11 @@ There are several reasons why I think a CSFE would be handy in addition to that:
 
 Of course such data processing by running a bunch of programs after oneanother will not have great performance. So why do it in the first place whether with `|` or the CSFE?
 
-To me it's a tool I use in Clean Code developer trainings:
+To me it's a tool I use in [Clean Code developer trainings](http://ccd-school.de):
 
 * With the CSFE I can split up a solution into service with very simple, very clear cut contracts and have them developed in parallel by groups of training participants. That's an exercise in contract-first programming as well as distributed development. It greatly helps to think in terms of modularization.
 * With the CSFE I'm not only able to integrate several services into a whole solution, I also can integrate developers on different platforms into a team. CSFE allows polyglot solutions. Having developers with different backgrounds in a training no longer is a difficulty but an opportunity when doing programming exercises. 
-* Getting training participants to work as a team on a modular code base makes it possible to tackle larger exercises. Trainings thus become more fun.
+* Getting training participants to work as a team on a modular code base makes it possible to tackle [larger exercises](http://ccd-school.de/coding-dojo/#cd5). Trainings thus become more fun.
 
 
 See the [wiki](https://github.com/ralfw/csfe/wiki) for more detailed information on all aspects of the CSFE.
