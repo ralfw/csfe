@@ -1,0 +1,4 @@
+﻿{
+  "executable":"ruby",
+  "arguments":"sum.rb"
+}
