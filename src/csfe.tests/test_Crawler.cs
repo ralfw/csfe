@@ -19,13 +19,10 @@ namespace csfe.tests
         {
             var services = ServiceCrawler.Compile_services("testflow1");
             
-            Assert.AreEqual(3, services.Count);
+            Assert.AreEqual(4, services.Count);
             Assert.AreEqual("mono", services["service1"].Executable);
             Assert.AreEqual("testflow1/service2", services["toupper"].Path);            
             Assert.AreEqual("testforoccurrenceofargs0.exe %argument", services["check"].Arguments);
         }
-
-
-
     }
 }

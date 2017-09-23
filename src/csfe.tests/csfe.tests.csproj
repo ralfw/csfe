@@ -64,6 +64,14 @@
       <Link>testflow1/service3/TestForOccurrenceOfArgs0.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\testservices\TestNegate_Go\negate_exe">
+      <Link>testflow1/service4_go/negate_exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\testservices\TestNegate_Go\service.json">
+      <Link>testflow1/service4_go/service.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\testservices\TestServiceAppendArgs0\bin\Debug\TestServiceAppendArgs0.exe">
       <Link>testflow1/service1/TestServiceAppendArgs0.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

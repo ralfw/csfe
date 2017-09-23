@@ -42,7 +42,7 @@ namespace csfe.adapters
 
         public ServiceAdapter(string path, string executablename, string arguments) {
             _path = path;
-            _executablename = executablename;
+            _executablename = executablename.Replace("%path", path);
             _arguments = arguments;
         }
             
@@ -53,8 +53,10 @@ namespace csfe.adapters
                 WorkingDirectory = _path,
                 CreateNoWindow = true
             };
+
             var p = Process.Start(pi);
             p.WaitForExit();
+            
             switch (p.ExitCode) {
                 case 0: return;
                 case 2: throw new ApplicationException($"Missing service '{_executablename} {_arguments}' in '{_path}'! Exit code {p.ExitCode}.");
