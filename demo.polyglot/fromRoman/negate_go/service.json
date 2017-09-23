@@ -1,4 +1,4 @@
 ﻿{
-  "executable":"./negate.exe",
+  "executable":"%path/negate_exe",
   "arguments":""
 }
