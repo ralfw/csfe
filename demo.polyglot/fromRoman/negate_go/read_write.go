@@ -51,12 +51,17 @@ func readFile(filename string) []string {
 	return lines
 }
 
-func write(jobs []Job) {
+func write(jobs []Job, deleteInputAfterWrite bool) {
 	for _, job := range jobs {
-		filename := fmt.Sprintf("output/%s", job.Filename)
-		err := ioutil.WriteFile(filename, job.LinesToByte(), 0644)
+		outputFilename := fmt.Sprintf("output/%s", job.Filename)
+		err := ioutil.WriteFile(outputFilename, job.LinesToByte(), 0644)
 		if err != nil {
 			panic(err)
+		}
+
+		if (deleteInputAfterWrite) {
+			inputFilename := fmt.Sprintf("input/%s", job.Filename)
+			os.Remove(inputFilename)
 		}
 	}
 }

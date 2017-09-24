@@ -1,7 +1,8 @@
 package main
 
 import (
-	"strconv"
+	"strconv";
+	"os"
 )
 
 func main() {
@@ -9,7 +10,9 @@ func main() {
 	for i, _ := range jobs {
 		jobs[i].Lines = Negate(jobs[i].Lines)
 	}
-	write(jobs)
+
+	deleteInputAfterProcessing := len(os.Args) > 1 && os.Args[1] == "-d"
+	write(jobs, deleteInputAfterProcessing)
 }
 
 func Negate(in []string) []string {
